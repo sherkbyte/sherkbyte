@@ -4,6 +4,7 @@ import ServiceCard from '@/components/ServiceCard';
 import StoryScroll from '@/components/StoryScroll';
 import CTASection from '@/components/CTASection';
 import { SERVICES } from '@/lib/services';
+import CloudDive from '@/components/CloudDive';
 
 const focus = 'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-400';
 const FLOW = ['Infrastructure', 'Network', 'Cloud', 'Data Analytics', 'AI Workflows', 'Quality Assurance'];
@@ -66,6 +67,7 @@ export default function Page() {
         </section>
 
         <StoryScroll />
+        <CloudDive />
         <CTASection />
       </main>
 
