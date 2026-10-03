@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 
-const CONTACT_EMAIL = 'contact@sherkbyte.com'; // TODO: replace with your real address or a form endpoint
+const CONTACT_EMAIL = 'sherkbyte@gmail.com'; // TODO: replace with your real address or a form endpoint
 
 export default function CTASection() {
   const [sent, setSent] = useState(false);
