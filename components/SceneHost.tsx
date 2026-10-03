@@ -10,7 +10,8 @@ const scenes = {
   cloud: lazy(() => import('./CloudScene')),
   data: lazy(() => import('./DataAnalyticsScene')),
   ai: lazy(() => import('./AIIntegrationScene')),
-  qa: lazy(() => import('./QualityAssuranceScene'))
+  qa: lazy(() => import('./QualityAssuranceScene')),
+  dive: lazy(() => import('./CloudDiveScene'))
 };
 const cams: Record<SceneKind, { pos: V3; fov: number }> = {
   hero: { pos: [0, 0.4, 13], fov: 38 },
@@ -18,8 +19,15 @@ const cams: Record<SceneKind, { pos: V3; fov: number }> = {
   cloud: { pos: [0, 0.6, 8], fov: 36 },
   data: { pos: [0, 0.4, 7.5], fov: 36 },
   ai: { pos: [0, 0.3, 8], fov: 36 },
-  qa: { pos: [0, 0, 6.2], fov: 36 }
+  qa: { pos: [0, 0, 6.2], fov: 36 },
+  dive: { pos: [0, 0.3, 10.5], fov: 40 }
 };
+
+// Tells the static (reduced-motion) renderer that a lazy scene has mounted, so it repaints.
+function Notify() {
+  useEffect(() => { window.dispatchEvent(new Event('sb-redraw')); }, []);
+  return null;
+}
 
 // Renders on demand at a capped frame rate; paused when off-screen or tab hidden.
 // With reduced motion it paints a still frame (and repaints on hover) instead of looping.
@@ -75,6 +83,7 @@ export default function SceneHost({ scene, animate, lite, active, stage, mode, p
       {animate && <PerformanceMonitor flipflops={3} bounds={() => [lite ? 22 : 40, 120]} onDecline={onDecline} onFallback={onFallback} />}
       <Suspense fallback={null}>
         <Scene animate={animate} lite={lite} stage={stage} mode={mode} progressRef={progressRef} />
+        <Notify />
       </Suspense>
     </Canvas>
   );
