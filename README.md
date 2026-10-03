@@ -1,69 +1,25 @@
-# React + TypeScript + Vite
+# SherkByte 3D Site
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Next.js 15 + React 19 + TypeScript + Tailwind + React Three Fiber / drei + Framer Motion.
 
-Currently, two official plugins are available:
+## Run
+    npm install
+    npm run dev        # http://localhost:3000
+    npm run typecheck
+    npm run build
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Structure
+- `app/page.tsx`: hero, services, scroll story, CTA (all content is real DOM text)
+- `components/LazyScene.tsx`: IntersectionObserver + WebGL detection + dynamic import (three.js loads only when needed)
+- `components/SceneHost.tsx`: Canvas, FPS cap (60 / 30 lite), pause off-screen, PerformanceMonitor degrade -> static fallback
+- `components/*Scene.tsx`: Hero, Infrastructure, Cloud, DataAnalytics, AIIntegration, QualityAssurance
+- `components/three/*`: ServerRack, CloudNode, NetworkConnection, DataPacket, AnalyticsPanel, AIWorkflowNode, ValidationIndicator
+- `lib/MotionContext.tsx`: prefers-reduced-motion + user toggles (persisted in localStorage)
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Behavior notes
+- No GLB models; everything is procedural geometry (small bundle).
+- Reduce Motion: no parallax, no camera/scroll motion, no packets; scenes paint a still frame.
+- Mobile / Simplify / low cores / slow FPS: fewer objects and packets, 30 fps, lower DPR; story section becomes a plain list.
+- Canvas containers are `aria-hidden`; nothing in the canvas is focusable. Stage buttons on service cards are real buttons.
+- AWS / Google Cloud appear as editable text labels in `CloudScene.tsx` (`LABELS`). No logos.
+- Replace `CONTACT_EMAIL` in `CTASection.tsx` with a real address or form endpoint.
