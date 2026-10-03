@@ -1,7 +1,7 @@
 import type { MutableRefObject } from 'react';
 
 export type V3 = [number, number, number];
-export type SceneKind = 'hero' | 'infrastructure' | 'cloud' | 'data' | 'ai' | 'qa';
+export type SceneKind = 'hero' | 'infrastructure' | 'cloud' | 'data' | 'ai' | 'qa' | 'dive';
 
 export type SceneProps = {
   animate: boolean;          // false when reduced motion is on
