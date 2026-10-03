@@ -1,3 +1,10 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = { reactStrictMode: true, transpilePackages: ['three'] };
+const nextConfig = {
+  output: 'export',
+  images: { unoptimized: true },
+  basePath: '/sherkbyte',
+  assetPrefix: '/sherkbyte/',
+  reactStrictMode: true,
+  transpilePackages: ['three']
+};
 export default nextConfig;
